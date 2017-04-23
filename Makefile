@@ -3,7 +3,7 @@ EXE		= quickbms
 CFLAGS	+= -m32 -s -O0 -fstack-protector-all -fno-unit-at-a-time -fno-omit-frame-pointer -w
 # Add -DQUICKBMS64 to CDEFS for compiling quickbms_4gb_files
 CDEFS	+= -DDISABLE_UCL -DDISABLE_MCRYPT -DDISABLE_TOMCRYPT
-CLIBS	+= -lstdc++ -ldl -lcrypto -lssl -lz -lbz2 -lstdc++ -lm -lpthread -llzo2
+CLIBS	+= -static-libstdc++ -lstdc++ -ldl -lcrypto -lssl -lz -lbz2 -lstdc++ -lm -lpthread -llzo2
 PREFIX	= /usr/local
 BINDIR	= $(PREFIX)/bin
 SRC		= $(EXE).c
