@@ -8,6 +8,11 @@ PREFIX	= /usr/local
 BINDIR	= $(PREFIX)/bin
 SRC		= $(EXE).c
 
+ifeq ($(shell uname -s), Darwin)
+CDEFS	+= -DDISABLE_LZO -DDISABLE_SSL
+CFLAGS	+= -Dunix
+endif
+
 # MacOSX steps:
 # - > xcode-select install
 # - > /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
@@ -18,8 +23,6 @@ SRC		= $(EXE).c
 
 #CC		= /usr/local/Cellar/gcc/6.2.0/bin/gcc-6
 #CXX		= /usr/local/Cellar/gcc/6.2.0/bin/g++-6
-#CDEFS	+= -DDISABLE_LZO -DDISABLE_SSL
-#CFLAGS	+= -Dunix
 
 all:
 	$(CC) $(SRC) $(CFLAGS) -o $(EXE) \
