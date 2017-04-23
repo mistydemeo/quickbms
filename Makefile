@@ -49,5 +49,8 @@ install:
 	install -m 755 -d $(BINDIR)
 	install -m 755 $(EXE) $(BINDIR)/$(EXE)
 
+clean:
+	rm -f quickbms
+
 .PHONY:
-	install
+	install clean
