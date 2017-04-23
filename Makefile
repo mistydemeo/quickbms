@@ -3,7 +3,7 @@ EXE		= quickbms
 CFLAGS	+= -m32 -s -O0 -fstack-protector-all -fno-unit-at-a-time -fno-omit-frame-pointer -w
 # Add -DQUICKBMS64 to CDEFS for compiling quickbms_4gb_files
 CDEFS	+= -DDISABLE_UCL -DDISABLE_MCRYPT -DDISABLE_TOMCRYPT
-CLIBS	+= -static-libstdc++ -lstdc++ -ldl -lcrypto -lssl -lz -lbz2 -lstdc++ -lm -lpthread -llzo2
+CLIBS	+= -static-libstdc++ -lstdc++ -ldl -lz -lbz2 -lstdc++ -lm -lpthread
 PREFIX	= /usr/local
 BINDIR	= $(PREFIX)/bin
 SRC		= $(EXE).c
@@ -11,6 +11,8 @@ SRC		= $(EXE).c
 ifeq ($(shell uname -s), Darwin)
 CDEFS	+= -DDISABLE_LZO -DDISABLE_SSL
 CFLAGS	+= -Dunix
+else
+CLIBS   += -llzo2 -lssl -lcrypto
 endif
 
 # MacOSX steps:
@@ -18,7 +20,6 @@ endif
 # - > /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 # - > brew install gcc
 # - remove "libs/amiga/*" from the list below after "all:"
-# - remove -llzo2 from the CLIBS above (otherwise you need OpenSSL and LZO2 32bit)
 # - uncomment the following lines:
 
 #CC		= /usr/local/Cellar/gcc/6.2.0/bin/gcc-6
