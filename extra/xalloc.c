@@ -61,7 +61,9 @@
 #include <stdlib.h>
 #include <stdint.h>
 #include <string.h>
+#if defined(__linux__) || defined(_WIN32)
 #include <malloc.h>
+#endif
 #include <errno.h>
 
 #ifdef WIN32

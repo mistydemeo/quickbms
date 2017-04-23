@@ -26,8 +26,9 @@
 #define XDBG_ALLOC_INCLUDE
 
 
-
+#if defined(__linux__) || defined(_WIN32)
 #include <malloc.h>
+#endif
 
 
 

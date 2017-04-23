@@ -9,7 +9,9 @@
  *
  */
 
+#if defined(__linux__) || defined(_WIN32)
 #include <malloc.h>
+#endif
 #include "libLZR.h"
 
 void LZRFillBuffer(unsigned int *test_mask, unsigned int *mask, unsigned int *buffer, unsigned char **next_in) {

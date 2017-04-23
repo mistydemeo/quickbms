@@ -19,7 +19,7 @@ SRC		= $(EXE).c
 #CC		= /usr/local/Cellar/gcc/6.2.0/bin/gcc-6
 #CXX		= /usr/local/Cellar/gcc/6.2.0/bin/g++-6
 #CDEFS	+= -DDISABLE_LZO -DDISABLE_SSL
-#CFLAGS	+= -I/usr/include/malloc/ -Dunix
+#CFLAGS	+= -Dunix
 
 all:
 	$(CC) $(SRC) $(CFLAGS) -o $(EXE) \
