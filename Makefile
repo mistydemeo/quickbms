@@ -3,17 +3,23 @@ EXE		= quickbms
 CFLAGS	+= -m32 -s -O0 -fstack-protector-all -fno-unit-at-a-time -fno-omit-frame-pointer -w
 # Add -DQUICKBMS64 to CDEFS for compiling quickbms_4gb_files
 CDEFS	+= -DDISABLE_UCL -DDISABLE_MCRYPT -DDISABLE_TOMCRYPT
-CLIBS	+= -static-libgcc -static-libstdc++ -lstdc++ -ldl -lz -lbz2 -lm -lpthread
+CLIBS	+= -static-libgcc -static-libstdc++ -lstdc++ -ldl -lz -lbz2 -lm -lpthread $(LDFLAGS)
 PREFIX	= /usr/local
 BINDIR	= $(PREFIX)/bin
 SRC		= $(EXE).c
 
 ifeq ($(shell uname -s), Darwin)
-CDEFS	+= -DDISABLE_LZO -DDISABLE_SSL
+CDEFS	+= -DDISABLE_LZO
 CFLAGS	+= -Dunix
 else
-CLIBS   += -llzo2 -lssl -lcrypto
+CLIBS   += -llzo2
 EXTRA_TARGETS = libs/amiga/*
+endif
+
+ifndef USE_OPENSSL
+CDEFS	+= -DDISABLE_SSL
+else
+CLIBS	+= -lssl -lcrypto
 endif
 
 # MacOSX steps:
@@ -24,6 +30,11 @@ endif
 
 #CC		= /usr/local/Cellar/gcc/6.2.0/bin/gcc-6
 #CXX		= /usr/local/Cellar/gcc/6.2.0/bin/g++-6
+
+# If using OpenSSL, also do:
+# - > export CFLAGS=-I$(brew --prefix openssl)/include
+# - > export LDFLAGS=-L$(brew --prefix openssl)/lib
+# - > export USE_OPENSSL=1
 
 all:
 	$(CC) $(SRC) $(CFLAGS) -o $(EXE) \
