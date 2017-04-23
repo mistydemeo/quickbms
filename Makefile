@@ -28,8 +28,8 @@ endif
 # - > brew install gcc
 # - uncomment the following lines:
 
-#CC		= /usr/local/Cellar/gcc/6.2.0/bin/gcc-6
-#CXX		= /usr/local/Cellar/gcc/6.2.0/bin/g++-6
+#CC		= gcc-6
+#CXX	= g++-6
 
 # If using OpenSSL, also do:
 # - > export CFLAGS=-I$(brew --prefix openssl)/include
